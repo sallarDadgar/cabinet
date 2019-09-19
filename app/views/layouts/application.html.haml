@@ -1,0 +1,23 @@
+%html
+%head
+  %title File cabinet "your life's work"
+  = csrf_meta_tags
+  = csp_meta_tag
+  = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+  = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+%body
+  %header
+    .header_inner
+      =link_to "FileCabiet", root_path, id: "logo"
+
+
+      %nav
+        - if user_signed_in?
+          = link_to "create doc", new_doc_path
+          = link_to "sign out", destroy_user_session_path, method: :delete
+
+        -else
+          = link_to "log in", new_user_session_path
+  %p.ntice= notice
+  %p.alert= alert
+  = yield
